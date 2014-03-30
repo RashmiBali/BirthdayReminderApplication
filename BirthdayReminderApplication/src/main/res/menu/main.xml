@@ -1,0 +1,51 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="dk.androiddevelopment.birthdayreminder.birthdayreminderapplication.MainActivity" >
+    
+    <item android:id="@+id/action_settings"
+        android:title="@string/action_settings"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
+
+    <item android:id="@+id/home"
+        android:icon="@drawable/ic_menu_home"
+        android:title="Home"
+        android:showAsAction="always" />
+
+    <item android:id="@+id/add"
+        android:icon="@drawable/ic_action_new"
+        android:title="Add"
+        android:showAsAction="always" />
+
+    <item android:id="@+id/favorite"
+        android:icon="@drawable/ic_action_favorite"
+        android:title="Favorite"
+        android:showAsAction="always" />
+
+    <item android:id="@+id/search"
+        android:icon="@drawable/ic_action_search"
+        android:title="Search"
+        android:showAsAction="always" />
+
+    <item android:id="@+id/more"
+        android:title="More"
+        android:showAsAction="always" >
+
+        <menu>
+            <item android:id="@+id/sortByName"
+                android:title="Sort by name" />
+
+            <item android:id="@+id/sortByBirthdayYear"
+                android:title="Sort by year" />
+
+            <item android:id="@+id/sortByBirthdayDate"
+                android:title="Sort by date" />
+
+            <item android:id="@+id/settings"
+                android:icon="@drawable/ic_action_settings"
+                android:title="settings"
+                android:showAsAction="always" />
+        </menu>
+    </item>
+
+</menu>

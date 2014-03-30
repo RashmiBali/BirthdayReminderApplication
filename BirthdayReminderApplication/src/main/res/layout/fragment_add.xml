@@ -1,0 +1,143 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="dk.androiddevelopment.birthdayreminder.birthdayreminderapplication.AddFragment">
+
+
+    <TextView
+        android:id="@+id/firstNameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        android:text="ENTER FIRST NAME:"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/lastNameText"
+        android:layout_marginTop="5dp"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/lastNameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/firstNameText"
+        android:layout_alignTop="@+id/firstNameText"
+        android:layout_marginTop="105dp"
+        android:text="ENTER LAST NAME:"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/firstNameText"
+        android:layout_marginTop="5dp"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/dateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/lastNameText"
+        android:layout_alignTop="@+id/lastNameText"
+        android:layout_marginTop="105dp"
+        android:text="ENTER DATE OF BIRTH:"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textStyle="bold" />
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/dateText"
+        android:layout_marginTop="5dp"
+        android:background="@android:color/darker_gray" />
+
+    <EditText
+        android:id="@+id/enterFirstName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/firstNameText"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="35dp"
+        android:ems="10"
+        android:hint="First name"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/enterLastName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/lastNameText"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="35dp"
+        android:ems="10"
+        android:hint="Last name"
+        android:inputType="textPersonName" />
+
+
+
+    <EditText
+        android:id="@+id/enterDay"
+        android:layout_width="85dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/dateText"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="35dp"
+        android:ems="10"
+        android:hint="Date"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/enterMonth"
+        android:layout_width="85dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/dateText"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="35dp"
+        android:ems="10"
+        android:hint="Month"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/enterYear"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/dateText"
+        android:layout_marginLeft="192dp"
+        android:layout_marginTop="35dp"
+        android:ems="10"
+        android:hint="Year"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/view1"
+        android:layout_below="@+id/enterDay"
+        android:layout_marginTop="25dp"
+        android:text="Save" />
+
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/view1"
+        android:layout_below="@+id/enterDay"
+        android:layout_marginTop="25dp"
+        android:text="Cancel" />
+
+</RelativeLayout>
