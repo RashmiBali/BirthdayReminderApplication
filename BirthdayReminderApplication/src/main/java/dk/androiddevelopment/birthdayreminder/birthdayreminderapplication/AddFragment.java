@@ -43,7 +43,7 @@ public class AddFragment extends Fragment{
     Button cancelButton;
     View view;
     Context context;
-    ArrayList<Friend> friends;
+    ArrayList<Friend> friendsList;
     FriendSerializer fs;
 
     public AddFragment() {
@@ -55,8 +55,8 @@ public class AddFragment extends Fragment{
         super.onActivityCreated(savedInstanceState);
         setupVariables();
         context = getActivity();
-        friends = new ArrayList<Friend>();
-        fs = new FriendSerializer(context, friends);
+        friendsList = new ArrayList<Friend>();
+        fs = new FriendSerializer(context, friendsList);
 
     }
 
@@ -72,14 +72,14 @@ public class AddFragment extends Fragment{
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                serialize();
+                save();
             }
         });
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                serializeR();
+                cancel();
             }
         });
 
@@ -156,7 +156,7 @@ public class AddFragment extends Fragment{
 
     public void cancel() {
         fs.read();
-        Toast.makeText(context, friends.get(0).getFirstName(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, friendsList.get(1).getFirstName(), Toast.LENGTH_SHORT).show();
     }
 
     public void serialize() {

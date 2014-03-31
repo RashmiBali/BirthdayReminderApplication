@@ -19,6 +19,7 @@ import model.Friend;
 public class FriendSerializer {
     private Context context;
     private ArrayList<Friend> friends;
+    private ArrayList<Friend> friendsList;
     final String FILENAME = "friendsList";
 
     public FriendSerializer() {
@@ -27,18 +28,20 @@ public class FriendSerializer {
 
     public FriendSerializer(Context context) {
         this.context = context;
+        friends = new ArrayList<Friend>();
     }
 
-    public FriendSerializer(Context context, ArrayList<Friend> friends) {
+    public FriendSerializer(Context context, ArrayList<Friend> friendsList) {
         this.context = context;
-        this.friends = friends;
+        this.friendsList = friendsList;
+        friends = new ArrayList<Friend>();
     }
 
     public boolean findDuplicate(String firstName, String lastName) {
         String myFirstName;
         String myLastName;
 
-        for (Friend friend : friends) {
+        for (Friend friend : friendsList) {
             myFirstName = friend.getFirstName();
             myLastName = friend.getLastName();
             if (myFirstName.equals(firstName) && myLastName.equals(lastName)) {
@@ -50,7 +53,7 @@ public class FriendSerializer {
 
     public boolean add(String firstName, String lastName,
                        GregorianCalendar birthday) {
-        if (new File(FILENAME).isFile()) {
+        if (new File(context.getFilesDir() + "/" + FILENAME).isFile()) {
             read();
         }
 
@@ -87,6 +90,9 @@ public class FriendSerializer {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        }
+        for(Friend friend: friends){
+            friendsList.add(friend);
         }
     }
 
