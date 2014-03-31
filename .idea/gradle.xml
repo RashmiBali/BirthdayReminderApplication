@@ -7,8 +7,8 @@
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/BirthdayReminderApplication" />
+            <option value="C:\Users\ShahrozAli\Android studioProjects\BirthdayReminderApplication" />
+            <option value="C:\Users\ShahrozAli\Android studioProjects\BirthdayReminderApplication\BirthdayReminderApplication" />
           </set>
         </option>
       </GradleProjectSettings>

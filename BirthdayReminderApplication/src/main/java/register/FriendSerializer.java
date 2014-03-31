@@ -18,8 +18,8 @@ import model.Friend;
  */
 public class FriendSerializer {
     private Context context;
-    private ArrayList<Friend> friends = new ArrayList<Friend>();
-    final String FILENAME = "friendsList.ser";
+    private ArrayList<Friend> friends;
+    final String FILENAME = "friendsList";
 
     public FriendSerializer() {
 
@@ -27,6 +27,11 @@ public class FriendSerializer {
 
     public FriendSerializer(Context context) {
         this.context = context;
+    }
+
+    public FriendSerializer(Context context, ArrayList<Friend> friends) {
+        this.context = context;
+        this.friends = friends;
     }
 
     public boolean findDuplicate(String firstName, String lastName) {
@@ -78,7 +83,9 @@ public class FriendSerializer {
             friends = (ArrayList<Friend>) sin.readObject();
             in.close();
             sin.close();
-        } catch (Exception e) {
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
