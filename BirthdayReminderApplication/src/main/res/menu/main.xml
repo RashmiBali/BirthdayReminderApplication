@@ -27,25 +27,19 @@
         android:title="Search"
         android:showAsAction="always" />
 
-    <item android:id="@+id/more"
-        android:title="More"
-        android:showAsAction="always" >
+    <item
+        android:id="@+id/sortByName"
+        android:showAsAction="never"
+        android:title="Sort by name" />
 
-        <menu>
-            <item android:id="@+id/sortByName"
-                android:title="Sort by name" />
+    <item
+        android:id="@+id/sortByBirthdayYear"
+        android:showAsAction="never"
+        android:title="Sort by year" />
 
-            <item android:id="@+id/sortByBirthdayYear"
-                android:title="Sort by year" />
-
-            <item android:id="@+id/sortByBirthdayDate"
-                android:title="Sort by date" />
-
-            <item android:id="@+id/settings"
-                android:icon="@drawable/ic_action_settings"
-                android:title="settings"
-                android:showAsAction="always" />
-        </menu>
-    </item>
+    <item
+        android:id="@+id/sortByBirthdayDate"
+        android:showAsAction="never"
+        android:title="Sort by date" />
 
 </menu>

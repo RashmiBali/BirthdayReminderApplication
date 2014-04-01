@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -17,16 +18,20 @@ import java.util.Comparator;
 import java.util.GregorianCalendar;
 
 import model.Friend;
+import register.FriendSerializer;
 
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link ListViewFragment.OnFragmentInteractionListener} interface
+ * {} interface
  * to handle interaction events.
  *
  */
 public class ListViewFragment extends ListFragment {
+    Context context;
+    ArrayList<Friend> friends;
+    FriendSerializer fs;
 
     public ListViewFragment() {
         // Required empty public constructor
@@ -35,37 +40,12 @@ public class ListViewFragment extends ListFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        context = getActivity();
+        friends = new ArrayList<Friend>();
+        fs = new FriendSerializer(context, friends);
+        fs.read();
 
-        ArrayList<Friend> friends = new ArrayList<Friend>();
-        Friend f1 = new Friend();
-        f1.setFirstName("Shahroz");
-        f1.setLastName("Ali");
-
-        GregorianCalendar birthdayF1 = new GregorianCalendar();
-        birthdayF1.set(1992, 03, 23);
-        f1.setBirthday(birthdayF1);
-
-        Friend f2 = new Friend();
-        f2.setFirstName("Ali");
-        f2.setLastName("Mahroz");
-
-        GregorianCalendar birthdayF2 = new GregorianCalendar();
-        birthdayF1.set(1995, 07, 18);
-        f2.setBirthday(birthdayF2);
-
-        Friend f3 = new Friend();
-        f3.setFirstName("Sharyaar");
-        f3.setLastName("Azmat");
-
-        GregorianCalendar birthdayF3 = new GregorianCalendar();
-        birthdayF1.set(2000, 01, 01);
-        f3.setBirthday(birthdayF3);
-
-        friends.add(f1);
-        friends.add(f2);
-        friends.add(f3);
-
-        setListAdapter(new CustomArrayAdapter(getActivity(), friends));
+        setListAdapter(new CustomArrayAdapter(context, friends));
     }
 
     @Override
@@ -74,7 +54,6 @@ public class ListViewFragment extends ListFragment {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         return rootView;
     }
-
 
     @Override
     public void onAttach(Activity activity) {
@@ -86,8 +65,17 @@ public class ListViewFragment extends ListFragment {
         super.onDetach();
     }
 
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        Friend friend = (Friend) getListAdapter().getItem(position);
+        getFragmentManager().beginTransaction()
+                .replace(R.id.container, new FriendProfileFragment(friend))
+                .commit();
+    }
+
     /**
-     * A simple array adapter that creates a list of cheeses.
+     * A simple array adapter that creates a list of friends.
      */
     private class CustomArrayAdapter extends ArrayAdapter<Friend> {
         private final Context context;
