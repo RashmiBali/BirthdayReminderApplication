@@ -10,12 +10,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -82,5 +84,8 @@ public class MainActivity extends Activity {
         getFragmentManager().beginTransaction()
                 .replace(R.id.container, new AddFragment())
                 .commit();
+    }
+
+    public void edit(View v) {
     }
 }

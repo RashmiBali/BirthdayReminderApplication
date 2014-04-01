@@ -58,7 +58,6 @@ public class AddFragment extends Fragment{
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        setupVariables();
         context = getActivity();
         friendsList = new ArrayList<Friend>();
         fs = new FriendSerializer(context, friendsList);
@@ -70,18 +69,7 @@ public class AddFragment extends Fragment{
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_add, container, false);
 
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                save();
-            }
-        });
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cancel();
-            }
-        });
+        setupVariables();
 
         return view;
     }
@@ -117,6 +105,19 @@ public class AddFragment extends Fragment{
 
         saveButton = (Button) view.findViewById(R.id.saveButton);
         cancelButton = (Button) view.findViewById(R.id.cancelButton);
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                save();
+            }
+        });
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cancel();
+            }
+        });
     }
 
     public void save() {

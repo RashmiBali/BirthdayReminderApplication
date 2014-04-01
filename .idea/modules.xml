@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BirthdayReminder.iml" filepath="$PROJECT_DIR$/BirthdayReminder.iml" />
       <module fileurl="file://$PROJECT_DIR$/BirthdayReminderApplication.iml" filepath="$PROJECT_DIR$/BirthdayReminderApplication.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BirthdayReminderApplication.iml" filepath="$PROJECT_DIR$/BirthdayReminderApplication.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BirthdayReminderApplication/BirthdayReminderApplication-BirthdayReminderApplication.iml" filepath="$PROJECT_DIR$/BirthdayReminderApplication/BirthdayReminderApplication-BirthdayReminderApplication.iml" />
       <module fileurl="file://$PROJECT_DIR$/BirthdayReminderApplication/BirthdayReminderApplication-BirthdayReminderApplication.iml" filepath="$PROJECT_DIR$/BirthdayReminderApplication/BirthdayReminderApplication-BirthdayReminderApplication.iml" />
     </modules>
   </component>

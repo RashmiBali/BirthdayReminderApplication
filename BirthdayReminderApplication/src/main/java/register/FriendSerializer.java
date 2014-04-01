@@ -10,6 +10,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 
 import model.Friend;
 
@@ -78,6 +79,18 @@ public class FriendSerializer {
         return false;
     }
 
+    public void addList(ArrayList<Friend> friends) {
+        try {
+            FileOutputStream fileOut = context.openFileOutput(FILENAME, Context.MODE_PRIVATE);
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(friends);
+            out.close();
+            fileOut.close();
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
+    }
+
     public void read() {
         friends.clear();
         try {
@@ -108,5 +121,17 @@ public class FriendSerializer {
             }
         }
         return null; // not found
+    }
+
+    public boolean delete(String firstName, String lastName) {
+        Iterator<Friend> it = friends.iterator();
+        while (it.hasNext()) {
+            Friend f = it.next();
+            if (f.getFirstName() == firstName && f.getLastName() == lastName) {
+                it.remove();
+            }
+        }
+        addList(friends);
+        return true;
     }
 }

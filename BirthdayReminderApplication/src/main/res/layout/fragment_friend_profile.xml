@@ -94,5 +94,4 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Day - Month - Year" />
 
-
 </RelativeLayout>
