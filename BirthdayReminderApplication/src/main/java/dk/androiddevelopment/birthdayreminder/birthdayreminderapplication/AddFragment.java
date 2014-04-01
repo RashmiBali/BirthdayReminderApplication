@@ -61,6 +61,7 @@ public class AddFragment extends Fragment{
         context = getActivity();
         friendsList = new ArrayList<Friend>();
         fs = new FriendSerializer(context, friendsList);
+
     }
 
     @Override
