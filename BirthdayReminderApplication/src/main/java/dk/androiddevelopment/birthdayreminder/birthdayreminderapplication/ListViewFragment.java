@@ -3,39 +3,26 @@ package dk.androiddevelopment.birthdayreminder.birthdayreminderapplication;
 import android.app.Activity;
 import android.app.ListFragment;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.GregorianCalendar;
+import java.util.Collections;
 
 import model.Friend;
-import register.FriendSerializer;
+import register.CustomArrayAdapter;
 
-
-/**
- * A simple {@link android.support.v4.app.Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {} interface
- * to handle interaction events.
- *
- */
 public class ListViewFragment extends ListFragment {
     Context context;
     ArrayList<Friend> friends;
-    FriendSerializer fs;
     CustomArrayAdapter adapter;
 
     public ListViewFragment() {
@@ -47,11 +34,11 @@ public class ListViewFragment extends ListFragment {
         super.onActivityCreated(savedInstanceState);
         context = getActivity();
         friends = new ArrayList<Friend>();
-        fs = new FriendSerializer(context, friends);
-        fs.read();
 
         adapter = new CustomArrayAdapter(context, friends);
         setListAdapter(adapter);
+        adapter.read();
+
         registerForContextMenu(getListView());
     }
 
@@ -59,6 +46,7 @@ public class ListViewFragment extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        setHasOptionsMenu(true);
         return rootView;
     }
 
@@ -86,11 +74,11 @@ public class ListViewFragment extends ListFragment {
         switch (item.getItemId()) {
             case R.id.edit:
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.container, new FriendProfileFragment(friend))
+                        .replace(R.id.container, new AddEditFragment(friend, adapter))
                         .commit();
                 return true;
             case R.id.delete:
-                fs.delete(friend.getFirstName(), friend.getLastName());
+                adapter.delete(friend.getFirstName(), friend.getLastName());
                 adapter.notifyDataSetChanged();
                 return true;
             default:
@@ -99,95 +87,52 @@ public class ListViewFragment extends ListFragment {
 
     }
 
-    /**
-     * A simple array adapter that creates a list of friends.
-     */
-    private class CustomArrayAdapter extends ArrayAdapter<Friend> {
-        private final Context context;
-        private final ArrayList<Friend> friends;
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        Friend friend = (Friend) getListAdapter().getItem(position);
+        getFragmentManager().beginTransaction()
+                .replace(R.id.container, new FriendProfileFragment(friend))
+                .commit();
+    }
 
-        class ViewHolder {
-            public TextView name;
-            public TextView birthday;
-            public ImageView icon;
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.listviewfragment, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        switch (item.getItemId()) {
+            case R.id.sortByName:
+                sortByName();
+                adapter.notifyDataSetChanged();
+                return true;
+            case R.id.sortByBirthdayDate:
+                sortByBirthdayDay();
+                adapter.notifyDataSetChanged();
+                return true;
+            case R.id.sortByBirthdayYear:
+                sortByBirthdayYear();
+                adapter.notifyDataSetChanged();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
+    }
 
-        public CustomArrayAdapter(Context context, ArrayList<Friend> friends) {
-            super(context, R.layout.list_layout, friends);
-            this.context = context;
-            this.friends = friends;
-        }
+    public void sortByName() {
+        Collections.sort(friends, Friend.NAME_COMPARATOR);
+    }
 
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View rowView = convertView;
-            // reuse views
-            if (rowView == null) {
-                LayoutInflater inflater = ((Activity)context).getLayoutInflater();
-                rowView = inflater.inflate(R.layout.list_layout, parent, false);
-                // configure view holder
-                ViewHolder viewHolder = new ViewHolder();
-                viewHolder.name = (TextView) rowView
-                        .findViewById(R.id.nameTextView1);
-                viewHolder.birthday = (TextView) rowView
-                        .findViewById(R.id.birthdayTextView1);
-                viewHolder.icon = (ImageView) rowView.findViewById(R.id.icon);
-                rowView.setTag(viewHolder);
-            }
+    public void sortByBirthdayYear() {
+        Collections.sort(friends, Friend.BIRTHDAY_COMPARATOR);
+    }
 
-            // fill data
-            ViewHolder holder = (ViewHolder) rowView.getTag();
-            Friend f = friends.get(position);
-            holder.name.setText(f.getFirstName() + " " + f.getLastName());
-            holder.birthday.setText(f.getDayOfMonth() + "/" + f.getMonth() + "/"
-                    + f.getYear());
-
-            return rowView;
-        }
-
-        @Override
-        public void add(Friend object) {
-            super.add(object);
-        }
-
-        @Override
-        public void clear() {
-            super.clear();
-        }
-
-        @Override
-        public void remove(Friend object) {
-            super.remove(object);
-        }
-
-        @Override
-        public void sort(Comparator<? super Friend> comparator) {
-            super.sort(comparator);
-        }
-
-        @Override
-        public void notifyDataSetChanged() {
-            super.notifyDataSetChanged();
-        }
-
-        @Override
-        public void setNotifyOnChange(boolean notifyOnChange) {
-            super.setNotifyOnChange(notifyOnChange);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return super.getItemId(position);
-        }
-
-        @Override
-        public int getCount() {
-            return super.getCount();
-        }
-
-        @Override
-        public Friend getItem(int position) {
-            return super.getItem(position);
-        }
+    public void sortByBirthdayDay() {
+        Collections.sort(friends, Friend.BIRTHDAY_COMPARATOR_EXCLUDING_YEAR);
     }
 }

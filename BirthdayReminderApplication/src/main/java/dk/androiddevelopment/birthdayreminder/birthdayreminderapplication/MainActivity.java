@@ -1,30 +1,9 @@
 package dk.androiddevelopment.birthdayreminder.birthdayreminderapplication;
 
 import android.app.Activity;
-import android.app.ActionBar;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.app.ListActivity;
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.PopupMenu;
-import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.GregorianCalendar;
-
-import model.Friend;
 
 
 public class MainActivity extends Activity {
@@ -64,28 +43,9 @@ public class MainActivity extends Activity {
         }
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            return rootView;
-        }
-    }
-
     public void add() {
         getFragmentManager().beginTransaction()
-                .replace(R.id.container, new AddFragment())
+                .replace(R.id.container, new AddEditFragment())
                 .commit();
-    }
-
-    public void edit(View v) {
     }
 }

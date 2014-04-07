@@ -20,19 +20,14 @@ public class Friend implements Serializable {
     private String lastName;
     private GregorianCalendar birthday;
 
-    public static final Comparator<Friend> FIRSTNAME_COMPARATOR = new Comparator<Friend>() {
+    public static final Comparator<Friend> NAME_COMPARATOR = new Comparator<Friend>() {
 
         @Override
         public int compare(final Friend friend1, final Friend friend2) {
-            return friend1.getFirstName().compareTo(friend2.getFirstName());
-        }
-    };
-
-    public static final Comparator<Friend> LASTNAME_COMPARATOR = new Comparator<Friend>() {
-
-        @Override
-        public int compare(final Friend friend1, final Friend friend2) {
-            return friend1.getLastName().compareTo(friend2.getLastName());
+            int res = friend1.getFirstName().compareTo(friend2.getFirstName());
+            if (res != 0)
+                return res;
+            return friend1.getLastName().compareTo(friend1.getLastName());
         }
     };
 

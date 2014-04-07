@@ -27,19 +27,4 @@
         android:title="Search"
         android:showAsAction="always" />
 
-    <item
-        android:id="@+id/sortByName"
-        android:showAsAction="never"
-        android:title="Sort by name" />
-
-    <item
-        android:id="@+id/sortByBirthdayYear"
-        android:showAsAction="never"
-        android:title="Sort by year" />
-
-    <item
-        android:id="@+id/sortByBirthdayDate"
-        android:showAsAction="never"
-        android:title="Sort by date" />
-
 </menu>
